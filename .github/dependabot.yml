@@ -7,6 +7,12 @@ updates:
     groups:
       dev-dependencies:
         dependency-type: development
+    ignore:
+      # TypeScript 7 (native compiler) drops the legacy compiler API that
+      # @hey-api/openapi-ts needs at generation time. Stay on 5.x until
+      # hey-api supports TS 7.
+      - dependency-name: typescript
+        versions: [">=6"]
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
