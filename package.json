@@ -1,0 +1,72 @@
+{
+  "name": "intervals-icu-sdk",
+  "version": "0.1.0",
+  "description": "Unofficial TypeScript SDK for the Intervals.icu API. Fully typed, zero runtime dependencies, generated from the official OpenAPI spec.",
+  "keywords": [
+    "intervals.icu",
+    "intervals",
+    "sdk",
+    "api-client",
+    "typescript",
+    "openapi",
+    "cycling",
+    "running",
+    "swimming",
+    "triathlon",
+    "training",
+    "fitness",
+    "wellness",
+    "garmin"
+  ],
+  "homepage": "https://github.com/jcurbelo/intervals-icu-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/jcurbelo/intervals-icu-sdk/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcurbelo/intervals-icu-sdk.git"
+  },
+  "license": "MIT",
+  "author": "Robin Curbelo (https://github.com/jcurbelo)",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18.17"
+  },
+  "scripts": {
+    "spec": "bun spec/normalize.ts --fetch",
+    "spec:check": "bun spec/normalize.ts",
+    "generate": "openapi-ts",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test",
+    "smoke": "bun scripts/smoke.ts",
+    "lint:pkg": "publint",
+    "prepublishOnly": "bun run typecheck && bun run test && bun run build && bun run lint:pkg"
+  },
+  "devDependencies": {
+    "@hey-api/openapi-ts": "^0.99.0",
+    "@types/bun": "^1.3.14",
+    "publint": "^0.3.14",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3"
+  }
+}

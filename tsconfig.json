@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "verbatimModuleSyntax": true,
+    "types": ["bun"]
+  },
+  "include": ["src", "test", "spec", "scripts", "examples", "openapi-ts.config.ts", "tsup.config.ts"]
+}

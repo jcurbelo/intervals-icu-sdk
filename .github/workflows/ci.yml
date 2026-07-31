@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Check generated code is in sync with the spec
+        run: |
+          bun run spec:check
+          bun run generate
+          git diff --exit-code -- spec/intervals-openapi.normalized.json src/gen \
+            || { echo "::error::src/gen is out of sync. Run 'bun run spec:check && bun run generate' and commit the result."; exit 1; }
+
+      - name: Typecheck
+        run: bun run typecheck
+
+      - name: Unit tests
+        run: bun run test
+
+      - name: Build
+        run: bun run build
+
+      - name: Validate package exports
+        run: bun run lint:pkg
+
+      - name: Import check (Node CJS)
+        run: node -e "const s = require('./dist/index.cjs'); if (typeof s.configureIntervals !== 'function') process.exit(1)"
+
+      - name: Import check (Node ESM)
+        run: node --input-type=module -e "const m = await import('./dist/index.js'); if (typeof m.configureIntervals !== 'function') process.exit(1)"

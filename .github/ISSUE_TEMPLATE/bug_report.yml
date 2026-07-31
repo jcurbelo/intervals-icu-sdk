@@ -1,0 +1,43 @@
+name: Bug report
+description: Something in the SDK does not work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. If your question is about the Intervals.icu API itself (endpoints, fields, limits), the [API forum thread](https://forum.intervals.icu/t/api-access-to-intervals-icu/609) is the right place.
+  - type: input
+    id: version
+    attributes:
+      label: SDK version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: runtime
+    attributes:
+      label: Runtime and version
+      placeholder: "Node 22.6 / Bun 1.2 / Deno 2.1 / ..."
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproduction
+      description: The smallest snippet that shows the problem. Remove your API key.
+      render: ts
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include error output and the HTTP status if relevant.
+    validations:
+      required: true

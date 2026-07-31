@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Intervals.icu API questions
+    url: https://forum.intervals.icu/t/api-access-to-intervals-icu/609
+    about: Questions about the API itself (endpoints, fields, auth, limits) are best asked on the Intervals.icu forum.

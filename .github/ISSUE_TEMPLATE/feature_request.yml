@@ -1,0 +1,24 @@
+name: Feature request
+description: Suggest an improvement to the SDK
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: API sketch, example call, or link to how another SDK does it.
+    validations:
+      required: false
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This is about the SDK, not the Intervals.icu API itself (API wishes belong on the Intervals.icu forum).
+          required: true
