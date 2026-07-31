@@ -39,6 +39,7 @@ If `normalize.ts` throws about an unclassified path or a missing rename, the ups
 
 ## Pull request guidelines
 
+- All changes land through pull requests, maintainers included: `main` is protected, requires the `ci` check, and has no direct-push exception for admins.
 - Keep PRs focused; separate spec refreshes from feature work.
 - Add or update a test when behavior changes.
 - `bun run typecheck && bun run test && bun run build` must pass.
