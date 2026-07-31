@@ -156,6 +156,7 @@ Issues and PRs are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md) for the dev
 
 ## Related projects
 
+- [Announcement and discussion thread](https://forum.intervals.icu/t/intervals-icu-sdk-typescript-sdk-generated-from-the-official-openapi-spec-open-source-unofficial/130850) for this SDK on the Intervals.icu forum
 - [Intervals.icu API docs](https://intervals.icu/api-docs.html) and the [API forum thread](https://forum.intervals.icu/t/api-access-to-intervals-icu/609)
 - [mvilanova/intervals-mcp-server](https://github.com/mvilanova/intervals-mcp-server): MCP server for using Intervals.icu data with AI assistants
 - Community client libraries in other styles: [paladini/node-intervals-icu](https://github.com/paladini/node-intervals-icu), [yerzhansa/intervals-icu-api](https://github.com/yerzhansa/intervals-icu-api)
