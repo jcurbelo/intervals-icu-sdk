@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test } from "bun:test";
 import { client, configureIntervals } from "../src/index";
 import { createClient } from "../src/gen/client";
-import { getAthlete, listActivities } from "../src/gen/sdk.gen";
+import { createEvent, getAthlete, listActivities } from "../src/gen/sdk.gen";
 
 /** Fetch stub that records every request and replies with a canned response. */
 function stub(replies: { status?: number; body?: unknown } = {}) {
@@ -91,6 +91,32 @@ describe("requests", () => {
     expect(url.searchParams.get("oldest")).toBe("2026-07-01");
     expect(url.searchParams.get("newest")).toBe("2026-07-31");
     expect(url.searchParams.get("limit")).toBe("5");
+  });
+});
+
+describe("server-defaulted params are optional", () => {
+  test("createEvent works without upsertOnUid (server defaults it)", async () => {
+    const { requests, fetchFn } = stub({ body: { id: 1 } });
+    const c = createClient({ baseUrl: "https://example.test", auth: () => "API_KEY:k", fetch: fetchFn });
+    await createEvent({
+      client: c,
+      path: { id: "0" },
+      body: { category: "NOTE", start_date_local: "2027-04-17T00:00:00", name: "race day" },
+    });
+    const url = new URL(requests[0]!.url);
+    expect(url.pathname).toBe("/api/v1/athlete/0/events");
+    expect(url.searchParams.has("upsertOnUid")).toBe(false);
+    expect(requests[0]!.method).toBe("POST");
+  });
+});
+
+describe("custom fetch passthrough", () => {
+  test("configureIntervals({ fetch }) routes requests through it", async () => {
+    const { requests, fetchFn } = stub();
+    configureIntervals({ apiKey: "k", baseUrl: "https://example.test", fetch: fetchFn });
+    await getAthlete({ path: { id: "0" } });
+    expect(requests).toHaveLength(1);
+    expect(requests[0]!.headers.get("authorization")).toBe(`Basic ${btoa("API_KEY:k")}`);
   });
 });
 

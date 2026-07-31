@@ -81,6 +81,21 @@ const RENAME_OPS: Record<string, string> = {
   listActivityPowerCurves_1: "getActivityPowerCurves", // /activity/{id}/power-curves
 };
 
+// Query params springdoc marks required:true but the server actually defaults when
+// omitted. Keyed by UPSTREAM operationId (before RENAME_OPS). Do not add entries
+// without verification. Evidence per entry (2026-07-31):
+// - createEvent.upsertOnUid: omitted for weeks in production use with correct
+//   default (create, no upsert) behavior.
+// - All others: requests omitting the params pass Spring parameter binding and
+//   reach handler logic (domain 422/404 errors, not "required parameter missing"
+//   400s), probed against the live API with zero-mutation requests.
+const OPTIONAL_QUERY_PARAMS: Record<string, string[]> = {
+  createEvent: ["upsertOnUid"],
+  createMultipleEvents: ["upsertOnUid", "updatePlanApplied"],
+  updateReminder: ["reset", "snoozeDays"],
+  updateSettings: ["recalcHrZones"], // renamed to updateSportSettings afterwards
+};
+
 type Dict = Record<string, any>;
 
 async function main() {
@@ -92,8 +107,9 @@ async function main() {
   }
 
   const doc: Dict = JSON.parse(await Bun.file(SRC).text());
-  const stats = { stripped: 0, merged: 0, kept: 0, multipart: 0, star: 0, renamed: 0 };
+  const stats = { stripped: 0, merged: 0, kept: 0, multipart: 0, star: 0, renamed: 0, relaxed: 0 };
   const renamesSeen = new Set<string>();
+  const relaxedSeen = new Set<string>();
   const methods = ["get", "put", "post", "delete", "patch"];
 
   // -- 1. {ext}/{format} paths ------------------------------------------------
@@ -138,6 +154,15 @@ async function main() {
     for (const v of methods) {
       const op = item[v];
       if (!op) continue;
+      // server-defaulted query params: required:true -> optional (upstream ids)
+      for (const name of OPTIONAL_QUERY_PARAMS[op.operationId] ?? []) {
+        const p = (op.parameters ?? []).find((q: Dict) => q.in === "query" && q.name === name);
+        if (p?.required) {
+          p.required = false;
+          relaxedSeen.add(`${op.operationId}.${name}`);
+          stats.relaxed++;
+        }
+      }
       // operationId renames
       if (op.operationId in RENAME_OPS) {
         renamesSeen.add(op.operationId);
@@ -166,6 +191,14 @@ async function main() {
   const unseen = Object.keys(RENAME_OPS).filter((k) => !renamesSeen.has(k));
   if (unseen.length)
     throw new Error(`RENAME_OPS entries not found upstream (spec drifted?): ${unseen.join(", ")}`);
+  const expectedRelaxed = Object.entries(OPTIONAL_QUERY_PARAMS).flatMap(([id, names]) =>
+    names.map((n) => `${id}.${n}`),
+  );
+  const unrelaxed = expectedRelaxed.filter((k) => !relaxedSeen.has(k));
+  if (unrelaxed.length)
+    throw new Error(
+      `OPTIONAL_QUERY_PARAMS entries not found as required upstream (spec drifted?): ${unrelaxed.join(", ")}`,
+    );
 
   await Bun.write(OUT, JSON.stringify(doc, null, 2) + "\n");
   const opCount = Object.values<Dict>(doc.paths).reduce(
@@ -176,7 +209,7 @@ async function main() {
     `normalized -> ${OUT}\n` +
       `  paths: ${Object.keys(doc.paths).length}, operations: ${opCount}\n` +
       `  ext-params stripped: ${stats.stripped} (merged into existing paths: ${stats.merged}), kept: ${stats.kept}\n` +
-      `  multipart fixed: ${stats.multipart}, wildcard responses -> json: ${stats.star}, operationIds renamed: ${stats.renamed}`,
+      `  multipart fixed: ${stats.multipart}, wildcard responses -> json: ${stats.star}, operationIds renamed: ${stats.renamed}, required params relaxed: ${stats.relaxed}`,
   );
 }
 

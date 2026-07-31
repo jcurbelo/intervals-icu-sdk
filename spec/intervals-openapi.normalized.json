@@ -859,7 +859,7 @@
           {
             "name": "reset",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "boolean"
             }
@@ -867,7 +867,7 @@
           {
             "name": "snoozeDays",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -1555,7 +1555,7 @@
             "name": "upsertOnUid",
             "in": "query",
             "description": "Update event with matching uid instead of creating a new one",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "boolean"
             }
@@ -2149,7 +2149,7 @@
           {
             "name": "recalcHrZones",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "boolean"
             }
@@ -3515,7 +3515,7 @@
             "name": "upsertOnUid",
             "in": "query",
             "description": "Update events with matching uid instead of creating new ones, ignored if upsert=true. For Events with category=TARGET existing matching targets for the date and type are updated",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "boolean"
             }
@@ -3524,7 +3524,7 @@
             "name": "updatePlanApplied",
             "in": "query",
             "description": "Give all events created or updated the same new plan_applied date (now)",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "boolean"
             }

@@ -3037,9 +3037,9 @@ export type UpdateReminderData = {
         gearId: string;
         reminderId: number;
     };
-    query: {
-        reset: boolean;
-        snoozeDays: number;
+    query?: {
+        reset?: boolean;
+        snoozeDays?: number;
     };
     url: '/api/v1/athlete/{id}/gear/{gearId}/reminder/{reminderId}';
 };
@@ -3377,11 +3377,11 @@ export type CreateEventData = {
     path: {
         id: string;
     };
-    query: {
+    query?: {
         /**
          * Update event with matching uid instead of creating a new one
          */
-        upsertOnUid: boolean;
+        upsertOnUid?: boolean;
     };
     url: '/api/v1/athlete/{id}/events';
 };
@@ -3618,8 +3618,8 @@ export type UpdateSportSettingsData = {
         athleteId: string;
         id: string;
     };
-    query: {
-        recalcHrZones: boolean;
+    query?: {
+        recalcHrZones?: boolean;
     };
     url: '/api/v1/athlete/{athleteId}/sport-settings/{id}';
 };
@@ -4179,7 +4179,7 @@ export type CreateMultipleEventsData = {
     path: {
         id: string;
     };
-    query: {
+    query?: {
         /**
          * Update events with matching external_id and created by the same OAuth application instead of creating new ones
          */
@@ -4187,11 +4187,11 @@ export type CreateMultipleEventsData = {
         /**
          * Update events with matching uid instead of creating new ones, ignored if upsert=true. For Events with category=TARGET existing matching targets for the date and type are updated
          */
-        upsertOnUid: boolean;
+        upsertOnUid?: boolean;
         /**
          * Give all events created or updated the same new plan_applied date (now)
          */
-        updatePlanApplied: boolean;
+        updatePlanApplied?: boolean;
     };
     url: '/api/v1/athlete/{id}/events/bulk';
 };

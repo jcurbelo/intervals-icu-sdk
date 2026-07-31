@@ -22,6 +22,11 @@ export interface IntervalsConfig {
   accessToken?: string;
   /** Override the API host (default https://intervals.icu). */
   baseUrl?: string;
+  /**
+   * Custom fetch implementation, for proxies, custom CAs, or instrumentation.
+   * See the "Proxies and restricted networks" section of the README.
+   */
+  fetch?: typeof fetch;
 }
 
 /**
@@ -41,6 +46,7 @@ export function configureIntervals(config: IntervalsConfig = {}): void {
   }
   client.setConfig({
     ...(config.baseUrl ? { baseUrl: config.baseUrl } : {}),
+    ...(config.fetch ? { fetch: config.fetch } : {}),
     // Operations advertise [basic, bearer]; the runtime base64-encodes basic credentials.
     auth: (auth) =>
       auth.scheme === "basic" ? (apiKey ? `API_KEY:${apiKey}` : undefined) : accessToken,

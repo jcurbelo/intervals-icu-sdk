@@ -103,6 +103,31 @@ const me = await getAthlete({ client, path: { id: "0" } });
 
 The client also exposes `interceptors.request` / `interceptors.response` for logging, retries, and similar concerns.
 
+## Proxies and restricted networks
+
+Some sandboxed environments (cloud agent containers, locked-down CI) force all egress through an HTTPS proxy with a custom CA, where a plain `fetch` fails with `ECONNRESET`. `configureIntervals` accepts a custom `fetch` for exactly this (and for instrumentation in general):
+
+```ts
+import { configureIntervals } from "intervals-icu-sdk";
+
+const PROXY = process.env.HTTPS_PROXY ?? process.env.https_proxy;
+const CA = process.env.NODE_EXTRA_CA_CERTS ?? process.env.SSL_CERT_FILE ?? process.env.CURL_CA_BUNDLE;
+
+configureIntervals({
+  fetch: PROXY
+    ? async (input, init) =>
+        fetch(input, {
+          ...init,
+          // Bun supports per-request proxy and TLS options on fetch
+          proxy: PROXY,
+          ...(CA ? { tls: { ca: await Bun.file(CA).text() } } : {}),
+        } as RequestInit)
+    : undefined,
+});
+```
+
+On Node, wrap `fetch` with undici's `EnvHttpProxyAgent` instead: `fetch(input, { ...init, dispatcher: new EnvHttpProxyAgent() })`.
+
 ## API coverage
 
 Function names mirror the API's operation ids, so the [official API docs](https://intervals.icu/api-docs.html) double as SDK docs. A taste of what is available:

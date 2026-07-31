@@ -5,6 +5,16 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-07-31
+
+### Changed
+
+- Query params that the server defaults are no longer marked required, so callers can omit them: `upsertOnUid` on `createEvent` and `createMultipleEvents`, `updatePlanApplied` on `createMultipleEvents`, `reset` and `snoozeDays` on `updateReminder`, `recalcHrZones` on `updateSportSettings`. Verified against the live API; existing callers that pass these params are unaffected.
+
+### Added
+
+- `configureIntervals` accepts a custom `fetch` implementation (proxies, custom CAs, instrumentation), plus a README section on proxies and restricted networks.
+
 ## [0.1.0] - 2026-07-31
 
 ### Added
@@ -15,5 +25,6 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - Dual ESM/CJS build with bundled type declarations, zero runtime dependencies.
 - Unit tests (stubbed fetch), opt-in live smoke test, runnable examples.
 
-[Unreleased]: https://github.com/jcurbelo/intervals-icu-sdk/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/jcurbelo/intervals-icu-sdk/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/jcurbelo/intervals-icu-sdk/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/jcurbelo/intervals-icu-sdk/releases/tag/v0.1.0

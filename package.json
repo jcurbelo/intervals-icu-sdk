@@ -1,6 +1,6 @@
 {
   "name": "intervals-icu-sdk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Unofficial TypeScript SDK for the Intervals.icu API. Fully typed, zero runtime dependencies, generated from the official OpenAPI spec.",
   "keywords": [
     "intervals.icu",
