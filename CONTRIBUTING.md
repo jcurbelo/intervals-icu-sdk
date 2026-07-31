@@ -57,4 +57,6 @@ INTERVALS_API_KEY=your-key bun run smoke
 
 1. Move the `Unreleased` notes in `CHANGELOG.md` to a new version section, bump `version` in `package.json`, and merge.
 2. Create a GitHub release with tag `vX.Y.Z` (matching `package.json`).
-3. The `release` workflow builds and publishes to npm with provenance. It needs an `NPM_TOKEN` repository secret (npm automation token), or npm [trusted publishing](https://docs.npmjs.com/trusted-publishers) configured for this repo, in which case the token can be removed.
+3. The `release` workflow publishes to npm via [trusted publishing](https://docs.npmjs.com/trusted-publishers) (OIDC): no tokens, provenance generated automatically. The trusted publisher is configured on npmjs.com (package settings) as this repo + `release.yml`.
+
+Note: npm cannot yet do a *first* publish of a new package via OIDC (npm/cli#8544), so brand-new package names must be published once manually with 2FA before the workflow can take over.

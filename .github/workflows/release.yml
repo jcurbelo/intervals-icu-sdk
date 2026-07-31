@@ -6,7 +6,7 @@ on:
 
 permissions:
   contents: read
-  id-token: write # npm provenance
+  id-token: write # OIDC trusted publishing + provenance
 
 jobs:
   publish:
@@ -20,8 +20,13 @@ jobs:
 
       - uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: 24
           registry-url: https://registry.npmjs.org
+
+      - name: Ensure npm supports trusted publishing (>= 11.5.1)
+        run: |
+          npm install -g npm@latest
+          npm --version
 
       - name: Check tag matches package.json version
         run: |
@@ -35,8 +40,9 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Publish to npm
-        # prepublishOnly runs typecheck, tests, build, and publint
-        run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish to npm (trusted publishing)
+        # No token: npm authenticates via the workflow's OIDC identity, which is
+        # registered as a trusted publisher for this package on npmjs.com.
+        # Provenance is generated automatically.
+        # prepublishOnly runs typecheck, tests, build, and publint.
+        run: npm publish
