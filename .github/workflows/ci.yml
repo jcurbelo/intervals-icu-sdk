@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch: # spec-drift.yml runs CI on the pull requests it opens
 
 permissions:
   contents: read
