@@ -1,7 +1,18 @@
 name: Spec drift
 
-# Re-fetches the upstream Intervals.icu OpenAPI spec weekly and fails when the
-# API changed, so staleness is visible instead of silent.
+# Re-fetches the upstream Intervals.icu OpenAPI spec weekly. When the API
+# changed, regenerates src/gen and opens (or updates) a pull request with the
+# result, then dispatches the `ci` workflow on that branch so the PR carries
+# the check `main` requires and can be reviewed and merged like any other.
+#
+# Prerequisite: Settings → Actions → General → Workflow permissions →
+# "Allow GitHub Actions to create and approve pull requests". Without it the
+# pull request step fails with "GitHub Actions is not permitted to create or
+# approve pull requests".
+#
+# Why the explicit CI dispatch: pushes and pull requests made with the
+# workflow's own GITHUB_TOKEN deliberately do not trigger other workflows, so
+# ci.yml would never run on the PR. workflow_dispatch is exempt from that rule.
 
 on:
   schedule:
@@ -9,7 +20,16 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write # push the sync branch
+  pull-requests: write # open/update the pull request
+  actions: write # dispatch ci.yml on the sync branch
+
+concurrency:
+  group: spec-drift
+  cancel-in-progress: false
+
+env:
+  SYNC_BRANCH: spec-drift/sync
 
 jobs:
   drift:
@@ -29,20 +49,61 @@ jobs:
           bun run spec
           bun run generate
 
-      - name: Report drift
+      - name: Detect drift and write the report
+        id: drift
         run: |
+          set -o pipefail # a failing report script must fail the step, not vanish into tee
           if git diff --quiet -- spec src/gen; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No upstream API changes." >> "$GITHUB_STEP_SUMMARY"
-          else
-            {
-              echo "## Upstream Intervals.icu API changed"
-              echo ""
-              echo '```'
-              git diff --stat -- spec src/gen
-              echo '```'
-              echo ""
-              echo "Run \`bun run spec && bun run generate\`, review, and open a PR."
-            } >> "$GITHUB_STEP_SUMMARY"
-            echo "::error::Upstream spec drifted; see the job summary."
-            exit 1
+            exit 0
           fi
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          git show HEAD:spec/intervals-openapi.json > "$RUNNER_TEMP/old-spec.json"
+          {
+            echo "## Upstream Intervals.icu API changed"
+            echo ""
+            echo "Automated resync of the spec snapshot and the generated SDK, produced by" \
+              "[this Spec drift run]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)" \
+              "with \`bun run spec && bun run generate\`."
+            echo ""
+            bun scripts/spec-drift-report.ts "$RUNNER_TEMP/old-spec.json" spec/intervals-openapi.json
+            echo ""
+            echo "### Files"
+            echo '```'
+            git diff --stat -- spec src/gen
+            echo '```'
+            echo ""
+            echo "Review the \`src/gen/types.gen.ts\` diff, check whether anything hand-written" \
+              "in \`src/\` should follow, and decide whether this warrants a release." \
+              "Later runs update this PR in place until it is merged or closed."
+          } | tee -a "$GITHUB_STEP_SUMMARY" > "$RUNNER_TEMP/pr-body.md"
+          cat "$RUNNER_TEMP/pr-body.md"
+
+      - name: Open or update the pull request
+        if: steps.drift.outputs.changed == 'true'
+        id: pr
+        uses: peter-evans/create-pull-request@v8
+        with:
+          base: main
+          branch: ${{ env.SYNC_BRANCH }}
+          add-paths: |
+            spec
+            src/gen
+          commit-message: Sync generated SDK with upstream OpenAPI spec
+          title: Sync generated SDK with upstream OpenAPI spec
+          body-path: ${{ runner.temp }}/pr-body.md
+          delete-branch: true
+
+      - name: Run CI on the pull request branch
+        if: steps.pr.outputs.pull-request-operation == 'created' || steps.pr.outputs.pull-request-operation == 'updated'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_OPERATION: ${{ steps.pr.outputs.pull-request-operation }}
+          PR_URL: ${{ steps.pr.outputs.pull-request-url }}
+        run: |
+          gh workflow run ci.yml --ref "$SYNC_BRANCH"
+          {
+            echo ""
+            echo "Pull request $PR_OPERATION: $PR_URL — \`ci.yml\` dispatched on \`$SYNC_BRANCH\`."
+          } >> "$GITHUB_STEP_SUMMARY"

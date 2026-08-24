@@ -14,7 +14,7 @@ Unofficial TypeScript SDK for the [Intervals.icu](https://intervals.icu) API. Fu
 - **Fully typed**: request paths, query params, bodies, and responses, straight from the spec.
 - **Zero runtime dependencies**: the fetch-based client is bundled into the package.
 - **Runs anywhere fetch does**: Node.js >= 18, Bun, Deno, edge runtimes. (Browsers work too, but never ship your API key to a browser.)
-- **Honest generation pipeline**: the spec snapshot, the normalization script, and the generator config are all in this repo. Regenerate at any time and CI fails when the upstream spec drifts.
+- **Honest generation pipeline**: the spec snapshot, the normalization script, and the generator config are all in this repo. Regenerate at any time; CI fails when `src/gen` is out of sync, and a weekly job opens a pull request when the upstream spec drifts.
 
 ## Installation
 

@@ -24,10 +24,13 @@ bun run typecheck && bun run test && bun run build
 | `src/index.ts` | the hand-written public surface (`configureIntervals`) | yes |
 | `test/` | unit tests with a stubbed fetch, no network | yes |
 | `scripts/smoke.ts` | opt-in live API smoke test | yes |
+| `scripts/spec-drift-report.ts` | Markdown summary of what changed between two spec snapshots, used for the Spec drift PR body | yes |
 
 If a change belongs in generated code, change the generator input instead: `spec/normalize.ts` or `openapi-ts.config.ts`, then run `bun run generate` and commit the result. CI regenerates and fails when `src/gen/` does not match the spec.
 
 ## Updating to a new upstream spec
+
+The [Spec drift](.github/workflows/spec-drift.yml) workflow does this every Monday: when the upstream spec changed it opens (or updates) a pull request from the `spec-drift/sync` branch with the refreshed snapshot and regenerated code, and runs CI on it. It can also be started by hand from the Actions tab (`gh workflow run spec-drift.yml`). To do the same locally:
 
 ```sh
 bun run spec        # fetch + normalize; fails loudly on unrecognized drift
