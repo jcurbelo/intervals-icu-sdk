@@ -5,6 +5,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ## [Unreleased]
 
+### Added
+
+- Types for the running-dynamics fields Intervals.icu added to `Activity`, `ActivityWithIntervals`, `Interval` and `IntervalGroup`: `average_stance_time_percent`, `average_stance_time_balance`, `average_vertical_speed`, `average_leg_spring_stiffness`, `average_impact_loading_rate` (upstream spec as of 2026-08-24).
+
+### Changed
+
+- The weekly spec-drift job now opens a pull request with the refreshed spec and regenerated SDK instead of only failing.
+
 ## [0.1.1] - 2026-07-31
 
 ### Changed
