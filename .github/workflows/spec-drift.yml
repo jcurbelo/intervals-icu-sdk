@@ -52,6 +52,7 @@ jobs:
       - name: Detect drift and write the report
         id: drift
         run: |
+          set -o pipefail # a failing report script must fail the step, not vanish into tee
           if git diff --quiet -- spec src/gen; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No upstream API changes." >> "$GITHUB_STEP_SUMMARY"
