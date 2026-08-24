@@ -8041,6 +8041,26 @@
             "type": "number",
             "format": "float"
           },
+          "average_stance_time_percent": {
+            "type": "number",
+            "format": "float"
+          },
+          "average_stance_time_balance": {
+            "type": "number",
+            "format": "float"
+          },
+          "average_vertical_speed": {
+            "type": "number",
+            "format": "float"
+          },
+          "average_leg_spring_stiffness": {
+            "type": "number",
+            "format": "float"
+          },
+          "average_impact_loading_rate": {
+            "type": "number",
+            "format": "float"
+          },
           "gap": {
             "type": "number",
             "format": "float"
@@ -8526,7 +8546,15 @@
               "$ref": "#/components/schemas/ActivityAnalysisIssue"
             }
           },
+          "icu_intensity": {
+            "type": "number",
+            "format": "float"
+          },
           "pace": {
+            "type": "number",
+            "format": "float"
+          },
+          "icu_efficiency_factor": {
             "type": "number",
             "format": "float"
           },
@@ -8536,14 +8564,6 @@
           },
           "group": {
             "type": "string"
-          },
-          "icu_intensity": {
-            "type": "number",
-            "format": "float"
-          },
-          "icu_efficiency_factor": {
-            "type": "number",
-            "format": "float"
           },
           "icu_power_hr": {
             "type": "number",
@@ -8863,6 +8883,26 @@
             "format": "float"
           },
           "average_step_length": {
+            "type": "number",
+            "format": "float"
+          },
+          "average_stance_time_percent": {
+            "type": "number",
+            "format": "float"
+          },
+          "average_stance_time_balance": {
+            "type": "number",
+            "format": "float"
+          },
+          "average_vertical_speed": {
+            "type": "number",
+            "format": "float"
+          },
+          "average_leg_spring_stiffness": {
+            "type": "number",
+            "format": "float"
+          },
+          "average_impact_loading_rate": {
             "type": "number",
             "format": "float"
           },
@@ -13917,6 +13957,26 @@
             "format": "float"
           },
           "average_step_length": {
+            "type": "number",
+            "format": "float"
+          },
+          "average_stance_time_percent": {
+            "type": "number",
+            "format": "float"
+          },
+          "average_stance_time_balance": {
+            "type": "number",
+            "format": "float"
+          },
+          "average_vertical_speed": {
+            "type": "number",
+            "format": "float"
+          },
+          "average_leg_spring_stiffness": {
+            "type": "number",
+            "format": "float"
+          },
+          "average_impact_loading_rate": {
             "type": "number",
             "format": "float"
           },
@@ -19147,6 +19207,26 @@
             "type": "number",
             "format": "float"
           },
+          "average_stance_time_percent": {
+            "type": "number",
+            "format": "float"
+          },
+          "average_stance_time_balance": {
+            "type": "number",
+            "format": "float"
+          },
+          "average_vertical_speed": {
+            "type": "number",
+            "format": "float"
+          },
+          "average_leg_spring_stiffness": {
+            "type": "number",
+            "format": "float"
+          },
+          "average_impact_loading_rate": {
+            "type": "number",
+            "format": "float"
+          },
           "gap": {
             "type": "number",
             "format": "float"
@@ -19632,7 +19712,15 @@
               "$ref": "#/components/schemas/ActivityAnalysisIssue"
             }
           },
+          "icu_intensity": {
+            "type": "number",
+            "format": "float"
+          },
           "pace": {
+            "type": "number",
+            "format": "float"
+          },
+          "icu_efficiency_factor": {
             "type": "number",
             "format": "float"
           },
@@ -19642,14 +19730,6 @@
           },
           "group": {
             "type": "string"
-          },
-          "icu_intensity": {
-            "type": "number",
-            "format": "float"
-          },
-          "icu_efficiency_factor": {
-            "type": "number",
-            "format": "float"
           },
           "icu_power_hr": {
             "type": "number",
