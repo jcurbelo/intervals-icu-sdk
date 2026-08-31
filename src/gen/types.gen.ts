@@ -1202,6 +1202,7 @@ export type SportSettings = {
     after_kj0?: number;
     after_kj1?: number;
     power_field?: string;
+    p30s_exponent?: number;
     lthr?: number;
     max_hr?: number;
     hr_zones?: Array<number>;
@@ -2238,15 +2239,8 @@ export type WithSportSettings = {
     training_plan_start_date?: string;
     training_availability?: Array<AthleteTrainingAvailability>;
     strava_authorized?: boolean;
-    sportSettings?: Array<SportSettings>;
     custom_items?: Array<CustomItem>;
-};
-
-export type ActivityMini = {
-    id?: string;
-    start_date_local?: string;
-    type?: string;
-    name?: string;
+    sportSettings?: Array<SportSettings>;
 };
 
 export type ActivityWeatherSummary = {
@@ -5480,7 +5474,7 @@ export type ListMatchingActivitiesResponses = {
     /**
      * OK
      */
-    200: Array<ActivityMini>;
+    200: Array<ActivitySearchResult>;
 };
 
 export type ListMatchingActivitiesResponse = ListMatchingActivitiesResponses[keyof ListMatchingActivitiesResponses];
