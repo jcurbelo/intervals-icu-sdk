@@ -311,11 +311,134 @@ export type Message = {
     seen?: boolean;
 };
 
+export type AthleteSearchResult = {
+    id?: string;
+    name?: string;
+    profile_medium?: string;
+    city?: string;
+    state?: string;
+    country?: string;
+    timezone?: string;
+    sex?: string;
+    bio?: string;
+    website?: string;
+    email?: string;
+};
+
 export type Attachment = {
     id?: string;
     filename?: string;
     mimetype?: string;
     url?: string;
+};
+
+export type Chat = {
+    id?: number;
+    type?: 'PRIVATE' | 'GROUP' | 'ACTIVITY';
+    coaching_group?: string;
+    updated?: string;
+    name?: string;
+    picture?: string;
+    description?: string;
+    url?: string;
+    slug?: string;
+    pub?: boolean;
+    join_policy?: 'OPEN' | 'ASK' | 'INVITE_ONLY';
+    sidebar_logo?: string;
+    sidebar_color?: string;
+    sidebar_dark?: boolean;
+    sidebar_top_color?: string;
+    hide_members?: boolean;
+    members_cannot_chat?: boolean;
+    primary_group?: boolean;
+    coins?: number;
+    members?: Array<ChatMember>;
+    athlete_id?: string;
+    activity_id?: string;
+    other_athlete_id?: string;
+    other_athlete_sex?: string;
+    follows_you?: string;
+    you_follow?: string;
+    role?: 'MEMBER' | 'FOLLOWER' | 'COACH' | 'ADMIN';
+    new_message_count?: number;
+    kicked?: string;
+    kicked_by_id?: string;
+    blocked?: string;
+    last_seen_message_id?: number;
+    mute_until?: string;
+    sharedFolders?: Array<Folder>;
+};
+
+export type ChatMember = {
+    athlete_id?: string;
+    name?: string;
+    profile_medium?: string;
+    role?: 'MEMBER' | 'FOLLOWER' | 'COACH' | 'ADMIN';
+    coach?: boolean;
+    plan?: 'FREE' | 'PREMIUM' | 'SUPPORTER' | 'WHITELABEL';
+    accepted_coaching_group?: string;
+};
+
+export type Folder = {
+    athlete_id?: string;
+    id?: number;
+    type?: 'FOLDER' | 'PLAN';
+    name?: string;
+    description?: string;
+    children?: Array<Workout>;
+    visibility?: 'PRIVATE' | 'PUBLIC';
+    start_date_local?: string;
+    rollout_weeks?: number;
+    auto_rollout_day?: number;
+    read_only_workouts?: boolean;
+    starting_ctl?: number;
+    starting_atl?: number;
+    activity_types?: Array<'Ride' | 'Run' | 'Swim' | 'WeightTraining' | 'Hike' | 'Walk' | 'AlpineSki' | 'BackcountrySki' | 'Badminton' | 'Canoeing' | 'Crossfit' | 'EBikeRide' | 'EMountainBikeRide' | 'Elliptical' | 'Golf' | 'GravelRide' | 'TrackRide' | 'Handcycle' | 'HighIntensityIntervalTraining' | 'Hockey' | 'IceSkate' | 'InlineSkate' | 'Kayaking' | 'Kitesurf' | 'MountainBikeRide' | 'Cyclocross' | 'NordicSki' | 'OpenWaterSwim' | 'Padel' | 'Pilates' | 'Pickleball' | 'Racquetball' | 'Rugby' | 'RockClimbing' | 'RollerSki' | 'Rowing' | 'Sail' | 'Skateboard' | 'Snowboard' | 'Snowshoe' | 'Soccer' | 'Squash' | 'StairStepper' | 'StandUpPaddling' | 'Surfing' | 'TableTennis' | 'Tennis' | 'TrailRun' | 'Transition' | 'Velomobile' | 'VirtualRide' | 'VirtualRow' | 'VirtualRun' | 'VirtualSki' | 'WaterSport' | 'Wheelchair' | 'Windsurf' | 'Workout' | 'Yoga' | 'Other'>;
+    num_workouts?: number;
+    duration_weeks?: number;
+    hours_per_week_min?: number;
+    hours_per_week_max?: number;
+    workout_targets?: Array<'AUTO' | 'POWER' | 'HR' | 'PACE'>;
+    blurb?: string;
+    canEdit?: boolean;
+    sharedWithCount?: number;
+    shareToken?: string;
+    owner?: AthleteSearchResult;
+};
+
+export type Workout = {
+    athlete_id?: string;
+    id?: number;
+    icu_training_load?: number;
+    name?: string;
+    description?: string;
+    type?: string;
+    indoor?: boolean;
+    color?: string;
+    moving_time?: number;
+    updated?: string;
+    joules?: number;
+    joules_above_ftp?: number;
+    workout_doc?: {
+        [key: string]: {
+            [key: string]: unknown;
+        };
+    };
+    folder_id?: number;
+    day?: number;
+    days?: number;
+    plan_applied?: string;
+    hide_from_athlete?: boolean;
+    target?: 'AUTO' | 'POWER' | 'HR' | 'PACE';
+    targets?: Array<'AUTO' | 'POWER' | 'HR' | 'PACE'>;
+    carbs_per_hour?: number;
+    tags?: Array<string>;
+    attachments?: Array<Attachment>;
+    time?: string;
+    sub_type?: 'NONE' | 'COMMUTE' | 'WARMUP' | 'COOLDOWN' | 'RACE';
+    for_week?: boolean;
+    distance?: number;
+    icu_intensity?: number;
 };
 
 export type WorkoutEx = {
@@ -352,41 +475,6 @@ export type WorkoutEx = {
     file_contents?: string;
     file_contents_base64?: string;
     filename?: string;
-    distance?: number;
-    icu_intensity?: number;
-};
-
-export type Workout = {
-    athlete_id?: string;
-    id?: number;
-    icu_training_load?: number;
-    name?: string;
-    description?: string;
-    type?: string;
-    indoor?: boolean;
-    color?: string;
-    moving_time?: number;
-    updated?: string;
-    joules?: number;
-    joules_above_ftp?: number;
-    workout_doc?: {
-        [key: string]: {
-            [key: string]: unknown;
-        };
-    };
-    folder_id?: number;
-    day?: number;
-    days?: number;
-    plan_applied?: string;
-    hide_from_athlete?: boolean;
-    target?: 'AUTO' | 'POWER' | 'HR' | 'PACE';
-    targets?: Array<'AUTO' | 'POWER' | 'HR' | 'PACE'>;
-    carbs_per_hour?: number;
-    tags?: Array<string>;
-    attachments?: Array<Attachment>;
-    time?: string;
-    sub_type?: 'NONE' | 'COMMUTE' | 'WARMUP' | 'COOLDOWN' | 'RACE';
-    for_week?: boolean;
     distance?: number;
     icu_intensity?: number;
 };
@@ -468,20 +556,6 @@ export type AthleteTrainingPlanUpdate = {
     training_plan_alias?: string;
 };
 
-export type AthleteSearchResult = {
-    id?: string;
-    name?: string;
-    profile_medium?: string;
-    city?: string;
-    state?: string;
-    country?: string;
-    timezone?: string;
-    sex?: string;
-    bio?: string;
-    website?: string;
-    email?: string;
-};
-
 export type AthleteTrainingPlan = {
     athlete_id?: string;
     training_plan_id?: number;
@@ -490,33 +564,6 @@ export type AthleteTrainingPlan = {
     training_plan_last_applied?: string;
     training_plan?: Folder;
     training_plan_alias?: string;
-};
-
-export type Folder = {
-    athlete_id?: string;
-    id?: number;
-    type?: 'FOLDER' | 'PLAN';
-    name?: string;
-    description?: string;
-    children?: Array<Workout>;
-    visibility?: 'PRIVATE' | 'PUBLIC';
-    start_date_local?: string;
-    rollout_weeks?: number;
-    auto_rollout_day?: number;
-    read_only_workouts?: boolean;
-    starting_ctl?: number;
-    starting_atl?: number;
-    activity_types?: Array<'Ride' | 'Run' | 'Swim' | 'WeightTraining' | 'Hike' | 'Walk' | 'AlpineSki' | 'BackcountrySki' | 'Badminton' | 'Canoeing' | 'Crossfit' | 'EBikeRide' | 'EMountainBikeRide' | 'Elliptical' | 'Golf' | 'GravelRide' | 'TrackRide' | 'Handcycle' | 'HighIntensityIntervalTraining' | 'Hockey' | 'IceSkate' | 'InlineSkate' | 'Kayaking' | 'Kitesurf' | 'MountainBikeRide' | 'Cyclocross' | 'NordicSki' | 'OpenWaterSwim' | 'Padel' | 'Pilates' | 'Pickleball' | 'Racquetball' | 'Rugby' | 'RockClimbing' | 'RollerSki' | 'Rowing' | 'Sail' | 'Skateboard' | 'Snowboard' | 'Snowshoe' | 'Soccer' | 'Squash' | 'StairStepper' | 'StandUpPaddling' | 'Surfing' | 'TableTennis' | 'Tennis' | 'TrailRun' | 'Transition' | 'Velomobile' | 'VirtualRide' | 'VirtualRow' | 'VirtualRun' | 'VirtualSki' | 'WaterSport' | 'Wheelchair' | 'Windsurf' | 'Workout' | 'Yoga' | 'Other'>;
-    num_workouts?: number;
-    duration_weeks?: number;
-    hours_per_week_min?: number;
-    hours_per_week_max?: number;
-    workout_targets?: Array<'AUTO' | 'POWER' | 'HR' | 'PACE'>;
-    blurb?: string;
-    canEdit?: boolean;
-    sharedWithCount?: number;
-    shareToken?: string;
-    owner?: AthleteSearchResult;
 };
 
 export type AthleteRoute = {
@@ -1202,6 +1249,7 @@ export type SportSettings = {
     after_kj0?: number;
     after_kj1?: number;
     power_field?: string;
+    p30s_exponent?: number;
     lthr?: number;
     max_hr?: number;
     hr_zones?: Array<number>;
@@ -1437,52 +1485,6 @@ export type NewMessage = {
     to_activity_id?: string;
     askACoach?: boolean;
     attachment_id?: string;
-};
-
-export type Chat = {
-    id?: number;
-    type?: 'PRIVATE' | 'GROUP' | 'ACTIVITY';
-    coaching_group?: string;
-    updated?: string;
-    name?: string;
-    picture?: string;
-    description?: string;
-    url?: string;
-    slug?: string;
-    pub?: boolean;
-    join_policy?: 'OPEN' | 'ASK' | 'INVITE_ONLY';
-    sidebar_logo?: string;
-    sidebar_color?: string;
-    sidebar_dark?: boolean;
-    sidebar_top_color?: string;
-    hide_members?: boolean;
-    members_cannot_chat?: boolean;
-    primary_group?: boolean;
-    coins?: number;
-    members?: Array<ChatMember>;
-    athlete_id?: string;
-    activity_id?: string;
-    other_athlete_id?: string;
-    other_athlete_sex?: string;
-    follows_you?: string;
-    you_follow?: string;
-    role?: 'MEMBER' | 'FOLLOWER' | 'COACH' | 'ADMIN';
-    new_message_count?: number;
-    kicked?: string;
-    kicked_by_id?: string;
-    last_seen_message_id?: number;
-    mute_until?: string;
-    sharedFolders?: Array<Folder>;
-};
-
-export type ChatMember = {
-    athlete_id?: string;
-    name?: string;
-    profile_medium?: string;
-    role?: 'MEMBER' | 'FOLLOWER' | 'COACH' | 'ADMIN';
-    coach?: boolean;
-    plan?: 'FREE' | 'PREMIUM' | 'SUPPORTER' | 'WHITELABEL';
-    accepted_coaching_group?: string;
 };
 
 export type SendResponse = {
@@ -2238,15 +2240,8 @@ export type WithSportSettings = {
     training_plan_start_date?: string;
     training_availability?: Array<AthleteTrainingAvailability>;
     strava_authorized?: boolean;
-    sportSettings?: Array<SportSettings>;
     custom_items?: Array<CustomItem>;
-};
-
-export type ActivityMini = {
-    id?: string;
-    start_date_local?: string;
-    type?: string;
-    name?: string;
+    sportSettings?: Array<SportSettings>;
 };
 
 export type ActivityWeatherSummary = {
@@ -2724,6 +2719,29 @@ export type UpdateMessageResponses = {
 };
 
 export type UpdateMessageResponse = UpdateMessageResponses[keyof UpdateMessageResponses];
+
+export type UpdateChatBlockedData = {
+    body?: never;
+    path: {
+        id: number;
+    };
+    query: {
+        /**
+         * True to block, false to unblock
+         */
+        on: boolean;
+    };
+    url: '/api/v1/chats/{id}/block';
+};
+
+export type UpdateChatBlockedResponses = {
+    /**
+     * OK
+     */
+    200: Chat;
+};
+
+export type UpdateChatBlockedResponse = UpdateChatBlockedResponses[keyof UpdateChatBlockedResponses];
 
 export type DeleteWorkoutData = {
     body?: never;
@@ -5480,7 +5498,7 @@ export type ListMatchingActivitiesResponses = {
     /**
      * OK
      */
-    200: Array<ActivityMini>;
+    200: Array<ActivitySearchResult>;
 };
 
 export type ListMatchingActivitiesResponse = ListMatchingActivitiesResponses[keyof ListMatchingActivitiesResponses];
