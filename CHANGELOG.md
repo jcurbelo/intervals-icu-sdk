@@ -5,6 +5,17 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-16
+
+### Changed
+
+- **Breaking:** `listMatchingActivities` now returns `ActivitySearchResult[]` instead of `ActivityMini[]`, following the upstream API. The `ActivityMini` export has been removed; replace imports and type annotations with `ActivitySearchResult`.
+
+### Added
+
+- `updateChatBlocked` to block or unblock the other athlete in a private chat using its `on` query parameter.
+- `Chat.blocked` and `SportSettings.p30s_exponent` fields from the refreshed upstream OpenAPI spec.
+
 ## [0.1.2] - 2026-08-24
 
 ### Added
@@ -35,7 +46,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - Dual ESM/CJS build with bundled type declarations, zero runtime dependencies.
 - Unit tests (stubbed fetch), opt-in live smoke test, runnable examples.
 
-[Unreleased]: https://github.com/jcurbelo/intervals-icu-sdk/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/jcurbelo/intervals-icu-sdk/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/jcurbelo/intervals-icu-sdk/compare/v0.1.2...v0.2.0
 [0.1.2]: https://github.com/jcurbelo/intervals-icu-sdk/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/jcurbelo/intervals-icu-sdk/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/jcurbelo/intervals-icu-sdk/releases/tag/v0.1.0
