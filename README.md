@@ -10,7 +10,7 @@ Unofficial TypeScript SDK for the [Intervals.icu](https://intervals.icu) API. Fu
 
 ## Features
 
-- **Complete coverage**: all 148 operations of the Intervals.icu API v1 (activities, wellness, calendar events, workout library, sport settings, gear, power/pace/HR curves, and more).
+- **Complete coverage**: all 149 operations of the Intervals.icu API v1 (activities, wellness, calendar events, workout library, sport settings, gear, power/pace/HR curves, and more).
 - **Fully typed**: request paths, query params, bodies, and responses, straight from the spec.
 - **Zero runtime dependencies**: the fetch-based client is bundled into the package.
 - **Runs anywhere fetch does**: Node.js >= 18, Bun, Deno, edge runtimes. (Browsers work too, but never ship your API key to a browser.)
@@ -139,7 +139,7 @@ Function names mirror the API's operation ids, so the [official API docs](https:
 | Calendar events | 16 | `listEvents`, `createEvent`, `createMultipleEvents`, `markEventAsDone`, `downloadEventWorkout` |
 | Athletes | 10 | `getAthlete`, `updateAthlete`, `getAthleteSummary`, `getAthleteTrainingPlan` |
 | Sport settings | 10 | `listSportSettings`, `getSportSettings`, `updateSportSettings` |
-| Chats | 10 | `listChats`, `sendMessage`, `listActivityMessages` |
+| Chats | 11 | `listChats`, `sendMessage`, `listActivityMessages`, `updateChatBlocked` |
 | Gear | 9 | `listGear`, `createGear`, `createReminder`, `replaceGear` |
 | Custom items | 7 | `listCustomItems`, `createCustomItem` |
 | Wellness | 6 | `listWellnessRecords`, `updateWellness`, `updateWellnessBulk`, `uploadWellness` |
