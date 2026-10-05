@@ -177,6 +177,7 @@ export type Activity = {
     carbs_ingested?: number;
     route_id?: number;
     analysis_issues?: Array<ActivityAnalysisIssue>;
+    submax_fatigue_test?: SubmaxFatigueTest;
     icu_intensity?: number;
     pace?: number;
     icu_efficiency_factor?: number;
@@ -526,6 +527,7 @@ export type Wellness = {
     vo2max?: number;
     comments?: string;
     steps?: number;
+    floorsClimbed?: number;
     respiration?: number;
     carbohydrates?: number;
     protein?: number;
@@ -1266,6 +1268,14 @@ export type SportSettings = {
     use_gap_zone_times?: boolean;
     best_effort_distances?: Array<number>;
     pace_curve_start?: number;
+    sft_type?: 'POWER' | 'PACE' | 'NONE';
+    sft_duration?: number;
+    sft_max_start_secs?: number;
+    sft_threshold_pace?: number;
+    sft_ftp?: number;
+    sft_target_percent?: number;
+    sft_tolerance_percent?: number;
+    sft_max_cv_percent?: number;
     load_order?: 'POWER_HR_PACE' | 'POWER_PACE_HR' | 'HR_POWER_PACE' | 'HR_PACE_POWER' | 'PACE_POWER_HR' | 'PACE_HR_POWER';
     tiz_order?: 'POWER_HR_PACE' | 'POWER_PACE_HR' | 'HR_POWER_PACE' | 'HR_PACE_POWER' | 'PACE_POWER_HR' | 'PACE_HR_POWER';
     workout_order?: 'POWER_HR_PACE' | 'POWER_PACE_HR' | 'HR_POWER_PACE' | 'HR_PACE_POWER' | 'PACE_POWER_HR' | 'PACE_HR_POWER';
@@ -1440,6 +1450,26 @@ export type Ignore = {
     power?: boolean;
     pace?: boolean;
     hr?: boolean;
+};
+
+export type SubmaxFatigueTest = {
+    type?: 'POWER' | 'PACE' | 'NONE';
+    start_index?: number;
+    end_index?: number;
+    end_index_hrrc?: number;
+    duration?: number;
+    average_watts?: number;
+    average_mps?: number;
+    cv?: number;
+    final_bpm?: number;
+    hrrc?: number;
+    target?: number;
+    max_cv_percent?: number;
+    tolerance_percent?: number;
+    rpe?: number;
+    tte_mins?: number;
+    ignore?: boolean;
+    efficiency_factor?: number;
 };
 
 export type ZoneInfo = {
@@ -2634,6 +2664,7 @@ export type ActivityWithIntervals = {
     carbs_ingested?: number;
     route_id?: number;
     analysis_issues?: Array<ActivityAnalysisIssue>;
+    submax_fatigue_test?: SubmaxFatigueTest;
     icu_intensity?: number;
     pace?: number;
     icu_efficiency_factor?: number;
