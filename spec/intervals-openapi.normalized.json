@@ -8588,6 +8588,9 @@
               "$ref": "#/components/schemas/ActivityAnalysisIssue"
             }
           },
+          "submax_fatigue_test": {
+            "$ref": "#/components/schemas/SubmaxFatigueTest"
+          },
           "icu_intensity": {
             "type": "number",
             "format": "float"
@@ -10018,6 +10021,10 @@
             "type": "string"
           },
           "steps": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "floorsClimbed": {
             "type": "integer",
             "format": "int32"
           },
@@ -13757,6 +13764,42 @@
             "type": "number",
             "format": "float"
           },
+          "sft_type": {
+            "type": "string",
+            "enum": [
+              "POWER",
+              "PACE",
+              "NONE"
+            ]
+          },
+          "sft_duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sft_max_start_secs": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sft_threshold_pace": {
+            "type": "number",
+            "format": "float"
+          },
+          "sft_ftp": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sft_target_percent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sft_tolerance_percent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sft_max_cv_percent": {
+            "type": "integer",
+            "format": "int32"
+          },
           "load_order": {
             "type": "string",
             "enum": [
@@ -14395,6 +14438,82 @@
           },
           "hr": {
             "type": "boolean"
+          }
+        }
+      },
+      "SubmaxFatigueTest": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "POWER",
+              "PACE",
+              "NONE"
+            ]
+          },
+          "start_index": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "end_index": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "end_index_hrrc": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "average_watts": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "average_mps": {
+            "type": "number",
+            "format": "float"
+          },
+          "cv": {
+            "type": "number",
+            "format": "float"
+          },
+          "final_bpm": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hrrc": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "target": {
+            "type": "number",
+            "format": "float"
+          },
+          "max_cv_percent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tolerance_percent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rpe": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tte_mins": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ignore": {
+            "type": "boolean"
+          },
+          "efficiency_factor": {
+            "type": "number",
+            "format": "float"
           }
         }
       },
@@ -19744,6 +19863,9 @@
             "items": {
               "$ref": "#/components/schemas/ActivityAnalysisIssue"
             }
+          },
+          "submax_fatigue_test": {
+            "$ref": "#/components/schemas/SubmaxFatigueTest"
           },
           "icu_intensity": {
             "type": "number",
