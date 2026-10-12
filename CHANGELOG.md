@@ -5,6 +5,19 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-12
+
+### Removed
+
+- **Breaking:** `applyToActivities` and its `ApplyToActivitiesData`, `ApplyToActivitiesResponse`, and `ApplyToActivitiesResponses` types, following removal of the upstream sport-settings apply endpoint. Remove calls and imports; the upstream spec does not define a direct replacement.
+
+### Added
+
+- `SubmaxFatigueTest` and the `submax_fatigue_test` field on `Activity` and `ActivityWithIntervals`.
+- Submax fatigue-test settings on `SportSettings`: `sft_type`, `sft_duration`, `sft_max_start_secs`, `sft_threshold_pace`, `sft_ftp`, `sft_target_percent`, `sft_tolerance_percent`, and `sft_max_cv_percent`.
+- `Wellness.floorsClimbed`.
+- Optional `oldest` and `newest` query parameters for `listMatchingActivities`.
+
 ## [0.2.0] - 2026-09-16
 
 ### Changed
@@ -46,7 +59,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - Dual ESM/CJS build with bundled type declarations, zero runtime dependencies.
 - Unit tests (stubbed fetch), opt-in live smoke test, runnable examples.
 
-[Unreleased]: https://github.com/jcurbelo/intervals-icu-sdk/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/jcurbelo/intervals-icu-sdk/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/jcurbelo/intervals-icu-sdk/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/jcurbelo/intervals-icu-sdk/compare/v0.1.2...v0.2.0
 [0.1.2]: https://github.com/jcurbelo/intervals-icu-sdk/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/jcurbelo/intervals-icu-sdk/compare/v0.1.0...v0.1.1
