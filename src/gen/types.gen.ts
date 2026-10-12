@@ -3620,27 +3620,6 @@ export type UpdateAthleteResponses = {
 
 export type UpdateAthleteResponse = UpdateAthleteResponses[keyof UpdateAthleteResponses];
 
-export type ApplyToActivitiesData = {
-    body?: never;
-    path: {
-        athleteId: string;
-        id: string;
-    };
-    query?: never;
-    url: '/api/v1/athlete/{athleteId}/sport-settings/{id}/apply';
-};
-
-export type ApplyToActivitiesResponses = {
-    /**
-     * OK
-     */
-    200: {
-        [key: string]: unknown;
-    };
-};
-
-export type ApplyToActivitiesResponse = ApplyToActivitiesResponses[keyof ApplyToActivitiesResponses];
-
 export type DeleteSportSettingsData = {
     body?: never;
     path: {
@@ -5521,7 +5500,16 @@ export type ListMatchingActivitiesData = {
         athleteId: string;
         id: string;
     };
-    query?: never;
+    query?: {
+        /**
+         * Local ISO-8601 date or date and time e.g. 2019-07-22T16:18:49 or 2019-07-22, defaults to all
+         */
+        oldest?: string;
+        /**
+         * Local ISO-8601 date or date and time, defaults to all
+         */
+        newest?: string;
+    };
     url: '/api/v1/athlete/{athleteId}/sport-settings/{id}/matching-activities';
 };
 
