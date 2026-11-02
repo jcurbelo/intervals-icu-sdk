@@ -2,7 +2,7 @@
 
 import { type Client, type ClientMeta, formDataBodySerializer, type Options as Options2, type RequestResult, type TDataShape } from './client';
 import { client } from './client.gen';
-import type { ApplyCurrentPlanChangesData, ApplyCurrentPlanChangesResponses, ApplyPlanData, ApplyPlanResponses, CalcDistanceEtcData, CalcDistanceEtcResponses, CheckMergeData, CheckMergeResponses, CreateCustomItemData, CreateCustomItemResponses, CreateEventData, CreateEventResponses, CreateFolderData, CreateFolderResponses, CreateGearData, CreateGearResponses, CreateManualActivityData, CreateManualActivityResponses, CreateMultipleEventsData, CreateMultipleEventsResponses, CreateMultipleManualActivitiesData, CreateMultipleManualActivitiesResponses, CreateMultipleWorkoutsData, CreateMultipleWorkoutsResponses, CreateReminderData, CreateReminderResponses, CreateSportSettingsData, CreateSportSettingsResponses, CreateWorkoutData, CreateWorkoutResponses, DeleteActivityData, DeleteActivityResponses, DeleteCustomItemData, DeleteCustomItemResponses, DeleteEventData, DeleteEventResponses, DeleteEventsBulkData, DeleteEventsBulkResponses, DeleteEventsData, DeleteEventsResponses, DeleteFolderData, DeleteFolderResponses, DeleteGearData, DeleteGearResponses, DeleteIntervalsData, DeleteIntervalsResponses, DeleteMessageData, DeleteMessageResponses, DeleteReminderData, DeleteReminderResponses, DeleteSportSettingsData, DeleteSportSettingsResponses, DeleteTombstoneData, DeleteTombstoneResponses, DeleteWorkoutData, DeleteWorkoutResponses, DisconnectAppData, DisconnectAppErrors, DisconnectAppResponses, DownloadActivitiesAsCsvData, DownloadActivitiesAsCsvResponses, DownloadActivityFileData, DownloadActivityFileResponses, DownloadActivityFitFileData, DownloadActivityFitFileResponses, DownloadActivityFitFilesData, DownloadActivityFitFilesResponses, DownloadActivityGpxFileData, DownloadActivityGpxFileResponses, DownloadEventWorkoutData, DownloadEventWorkoutResponses, DownloadWorkoutData, DownloadWorkoutForAthleteData, DownloadWorkoutForAthleteResponses, DownloadWorkoutResponses, DownloadWorkoutsData, DownloadWorkoutsResponses, DuplicateEventsData, DuplicateEventsResponses, DuplicateWorkoutsData, DuplicateWorkoutsResponses, FindBestEffortsData, FindBestEffortsResponses, GetActivitiesData, GetActivitiesResponses, GetActivityData, GetActivityHrCurveData, GetActivityHrCurveResponses, GetActivityMapData, GetActivityMapResponses, GetActivityPaceCurveData, GetActivityPaceCurveResponses, GetActivityPowerCurveData, GetActivityPowerCurveResponses, GetActivityPowerCurvesData, GetActivityPowerCurvesResponses, GetActivityPowerSpikeModelData, GetActivityPowerSpikeModelResponses, GetActivityResponses, GetActivitySegmentsData, GetActivitySegmentsResponses, GetActivityStreamsData, GetActivityStreamsResponses, GetActivityWeatherSummaryData, GetActivityWeatherSummaryResponses, GetAthleteConnectionsData, GetAthleteConnectionsResponses, GetAthleteData, GetAthleteMmpModelData, GetAthleteMmpModelResponses, GetAthleteProfileData, GetAthleteProfileResponses, GetAthleteResponses, GetAthleteRouteData, GetAthleteRouteResponses, GetAthleteSummaryData, GetAthleteSummaryResponses, GetAthleteTrainingPlanData, GetAthleteTrainingPlanResponses, GetCustomItemData, GetCustomItemResponses, GetDeviceSettingsData, GetDeviceSettingsResponses, GetForecastData, GetForecastResponses, GetGapHistogramData, GetGapHistogramResponses, GetHrHistogramData, GetHrHistogramResponses, GetHrTrainingLoadModelData, GetHrTrainingLoadModelResponses, GetIntervalsData, GetIntervalsResponses, GetIntervalStatsData, GetIntervalStatsResponses, GetPaceHistogramData, GetPaceHistogramResponses, GetPowerHistogramData, GetPowerHistogramResponses, GetPowerHrCurveData, GetPowerHrCurveResponses, GetPowerVsHrData, GetPowerVsHrResponses, GetRecordData, GetRecordResponses, GetSharedEventData, GetSharedEventResponses, GetSportSettingsData, GetSportSettingsResponses, GetTimeAtHrData, GetTimeAtHrResponses, GetWeatherConfigData, GetWeatherConfigResponses, ImportWorkoutFileData, ImportWorkoutFileResponses, ListActivitiesAroundData, ListActivitiesAroundResponses, ListActivitiesData, ListActivitiesResponses, ListActivityHrCurvesData, ListActivityHrCurvesResponses, ListActivityMessagesData, ListActivityMessagesResponses, ListActivityPaceCurvesData, ListActivityPaceCurvesResponses, ListActivityPowerCurvesData, ListActivityPowerCurvesResponses, ListActivityTagsData, ListActivityTagsResponses, ListAthleteHrCurvesData, ListAthleteHrCurvesResponses, ListAthletePaceCurvesData, ListAthletePaceCurvesResponses, ListAthletePowerCurvesData, ListAthletePowerCurvesResponses, ListAthleteRoutesData, ListAthleteRoutesResponses, ListAthletesData, ListAthletesResponses, ListChatsData, ListChatsResponses, ListCustomItemsData, ListCustomItemsResponses, ListEventsData, ListEventsResponses, ListEventTagsData, ListEventTagsResponses, ListFitnessModelEventsData, ListFitnessModelEventsResponses, ListFoldersData, ListFolderSharedWithData, ListFolderSharedWithResponses, ListFoldersResponses, ListGearData, ListGearResponses, ListGroupsData, ListGroupsResponses, ListMatchingActivitiesData, ListMatchingActivitiesResponses, ListMessagesData, ListMessagesResponses, ListPaceDistancesData, ListPaceDistancesForSportData, ListPaceDistancesForSportResponses, ListPaceDistancesResponses, ListSportSettingsData, ListSportSettingsResponses, ListWellnessRecordsData, ListWellnessRecordsResponses, ListWorkoutsData, ListWorkoutsResponses, ListWorkoutTagsData, ListWorkoutTagsResponses, MarkEventAsDoneData, MarkEventAsDoneResponses, ReplaceGearData, ReplaceGearResponses, SearchForActivitiesData, SearchForActivitiesFullData, SearchForActivitiesFullResponses, SearchForActivitiesResponses, SearchForIntervalsData, SearchForIntervalsResponses, SendActivityMessageData, SendActivityMessageResponses, SendMessageData, SendMessageResponses, ShowChatData, ShowChatResponses, ShowEventData, ShowEventResponses, ShowWorkoutData, ShowWorkoutResponses, SplitIntervalData, SplitIntervalResponses, UpdateActivityData, UpdateActivityResponses, UpdateActivityStreamsData, UpdateActivityStreamsResponses, UpdateAthleteData, UpdateAthletePlanData, UpdateAthletePlanResponses, UpdateAthletePlansData, UpdateAthletePlansResponses, UpdateAthleteResponses, UpdateAthleteRouteData, UpdateAthleteRouteResponses, UpdateChatBlockedData, UpdateChatBlockedResponses, UpdateCustomItemData, UpdateCustomItemImageData, UpdateCustomItemImageResponses, UpdateCustomItemIndexesData, UpdateCustomItemIndexesResponses, UpdateCustomItemResponses, UpdateEventData, UpdateEventResponses, UpdateEventsData, UpdateEventsResponses, UpdateFolderData, UpdateFolderResponses, UpdateFolderSharedWithData, UpdateFolderSharedWithResponses, UpdateGearData, UpdateGearResponses, UpdateIntervalData, UpdateIntervalResponses, UpdateIntervalsData, UpdateIntervalsResponses, UpdateLastSeenMessageIdData, UpdateLastSeenMessageIdResponses, UpdateMessageData, UpdateMessageResponses, UpdatePlanWorkoutsData, UpdatePlanWorkoutsResponses, UpdateReminderData, UpdateReminderResponses, UpdateSportSettingsData, UpdateSportSettingsMultiData, UpdateSportSettingsMultiResponses, UpdateSportSettingsResponses, UpdateWeatherConfigData, UpdateWeatherConfigResponses, UpdateWellnessBulkData, UpdateWellnessBulkResponses, UpdateWellnessData, UpdateWellnessRecordData, UpdateWellnessRecordResponses, UpdateWellnessResponses, UpdateWorkoutData, UpdateWorkoutResponses, UploadActivityData, UploadActivityResponses, UploadActivityStreamsCsvData, UploadActivityStreamsCsvResponses, UploadWellnessData, UploadWellnessResponses } from './types.gen';
+import type { ApplyCurrentPlanChangesData, ApplyCurrentPlanChangesResponses, ApplyPlanData, ApplyPlanResponses, CalcDistanceEtcData, CalcDistanceEtcResponses, CheckMergeData, CheckMergeResponses, CreateCustomItemData, CreateCustomItemResponses, CreateEventData, CreateEventResponses, CreateFolderData, CreateFolderResponses, CreateGearData, CreateGearResponses, CreateManualActivityData, CreateManualActivityResponses, CreateMultipleEventsData, CreateMultipleEventsResponses, CreateMultipleManualActivitiesData, CreateMultipleManualActivitiesResponses, CreateMultipleWorkoutsData, CreateMultipleWorkoutsResponses, CreateReminderData, CreateReminderResponses, CreateSportSettingsData, CreateSportSettingsResponses, CreateWorkoutData, CreateWorkoutResponses, DeleteActivityData, DeleteActivityResponses, DeleteCustomItemData, DeleteCustomItemResponses, DeleteEventData, DeleteEventResponses, DeleteEventsBulkData, DeleteEventsBulkResponses, DeleteEventsData, DeleteEventsResponses, DeleteFolderData, DeleteFolderResponses, DeleteGearData, DeleteGearResponses, DeleteIntervalsData, DeleteIntervalsResponses, DeleteMessageData, DeleteMessageResponses, DeleteReminderData, DeleteReminderResponses, DeleteSportSettingsData, DeleteSportSettingsResponses, DeleteTombstoneData, DeleteTombstoneResponses, DeleteWorkoutData, DeleteWorkoutResponses, DisconnectAppData, DisconnectAppErrors, DisconnectAppResponses, DownloadActivitiesAsCsvData, DownloadActivitiesAsCsvResponses, DownloadActivityFileData, DownloadActivityFileResponses, DownloadActivityFitFileData, DownloadActivityFitFileResponses, DownloadActivityFitFilesData, DownloadActivityFitFilesResponses, DownloadActivityGpxFileData, DownloadActivityGpxFileResponses, DownloadEventWorkoutData, DownloadEventWorkoutResponses, DownloadWorkoutData, DownloadWorkoutForAthleteData, DownloadWorkoutForAthleteResponses, DownloadWorkoutResponses, DownloadWorkoutsData, DownloadWorkoutsResponses, DuplicateEventsData, DuplicateEventsResponses, DuplicateWorkoutsData, DuplicateWorkoutsResponses, FindBestEffortsData, FindBestEffortsResponses, GetActivitiesData, GetActivitiesResponses, GetActivityData, GetActivityHrCurveData, GetActivityHrCurveResponses, GetActivityMapData, GetActivityMapResponses, GetActivityPaceCurveData, GetActivityPaceCurveResponses, GetActivityPowerCurveData, GetActivityPowerCurveResponses, GetActivityPowerCurvesData, GetActivityPowerCurvesResponses, GetActivityPowerSpikeModelData, GetActivityPowerSpikeModelResponses, GetActivityResponses, GetActivitySegmentsData, GetActivitySegmentsResponses, GetActivityStreamsData, GetActivityStreamsResponses, GetActivityWeatherSummaryData, GetActivityWeatherSummaryResponses, GetAthleteConnectionsData, GetAthleteConnectionsResponses, GetAthleteData, GetAthleteMmpModelData, GetAthleteMmpModelResponses, GetAthleteProfileData, GetAthleteProfileResponses, GetAthleteResponses, GetAthleteRouteData, GetAthleteRouteResponses, GetAthleteSummaryData, GetAthleteSummaryResponses, GetAthleteTrainingPlanData, GetAthleteTrainingPlanResponses, GetCustomItemData, GetCustomItemResponses, GetDeviceSettingsData, GetDeviceSettingsResponses, GetForecastData, GetForecastResponses, GetGapHistogramData, GetGapHistogramResponses, GetHrHistogramData, GetHrHistogramResponses, GetHrTrainingLoadModelData, GetHrTrainingLoadModelResponses, GetIntervalsData, GetIntervalsResponses, GetIntervalStatsData, GetIntervalStatsResponses, GetPaceHistogramData, GetPaceHistogramResponses, GetPowerHistogramData, GetPowerHistogramResponses, GetPowerHrCurveData, GetPowerHrCurveResponses, GetPowerVsHrData, GetPowerVsHrResponses, GetRecordData, GetRecordResponses, GetSftAnalysisData, GetSftAnalysisResponses, GetSharedEventData, GetSharedEventResponses, GetSportSettingsData, GetSportSettingsResponses, GetTimeAtHrData, GetTimeAtHrResponses, GetWeatherConfigData, GetWeatherConfigResponses, ImportWorkoutFileData, ImportWorkoutFileResponses, ListActivitiesAroundData, ListActivitiesAroundResponses, ListActivitiesData, ListActivitiesResponses, ListActivityHrCurvesData, ListActivityHrCurvesResponses, ListActivityMessagesData, ListActivityMessagesResponses, ListActivityPaceCurvesData, ListActivityPaceCurvesResponses, ListActivityPowerCurvesData, ListActivityPowerCurvesResponses, ListActivityTagsData, ListActivityTagsResponses, ListAthleteHrCurvesData, ListAthleteHrCurvesResponses, ListAthletePaceCurvesData, ListAthletePaceCurvesResponses, ListAthletePowerCurvesData, ListAthletePowerCurvesResponses, ListAthleteRoutesData, ListAthleteRoutesResponses, ListAthletesData, ListAthletesResponses, ListChatsData, ListChatsResponses, ListCustomItemsData, ListCustomItemsResponses, ListEventsData, ListEventsResponses, ListEventTagsData, ListEventTagsResponses, ListFitnessModelEventsData, ListFitnessModelEventsResponses, ListFoldersData, ListFolderSharedWithData, ListFolderSharedWithResponses, ListFoldersResponses, ListFolderWorkoutsData, ListFolderWorkoutsResponses, ListGearData, ListGearResponses, ListGroupsData, ListGroupsResponses, ListMatchingActivitiesData, ListMatchingActivitiesResponses, ListMessagesData, ListMessagesResponses, ListPaceDistancesData, ListPaceDistancesForSportData, ListPaceDistancesForSportResponses, ListPaceDistancesResponses, ListSportSettingsData, ListSportSettingsResponses, ListWellnessRecordsData, ListWellnessRecordsResponses, ListWorkoutsData, ListWorkoutsResponses, ListWorkoutTagsData, ListWorkoutTagsResponses, MarkEventAsDoneData, MarkEventAsDoneResponses, ReplaceActivityFileData, ReplaceActivityFileResponses, ReplaceGearData, ReplaceGearResponses, SearchForActivitiesData, SearchForActivitiesFullData, SearchForActivitiesFullResponses, SearchForActivitiesResponses, SearchForFoldersData, SearchForFoldersResponses, SearchForIntervalsData, SearchForIntervalsResponses, SendActivityMessageData, SendActivityMessageResponses, SendMessageData, SendMessageResponses, ShareFolderWithMeData, ShareFolderWithMeResponses, ShowChatData, ShowChatResponses, ShowEventData, ShowEventResponses, ShowWorkoutData, ShowWorkoutResponses, SplitIntervalData, SplitIntervalResponses, UpdateActivityData, UpdateActivityResponses, UpdateActivityStreamsData, UpdateActivityStreamsResponses, UpdateAthleteData, UpdateAthletePlanData, UpdateAthletePlanResponses, UpdateAthletePlansData, UpdateAthletePlansResponses, UpdateAthleteResponses, UpdateAthleteRouteData, UpdateAthleteRouteResponses, UpdateChatBlockedData, UpdateChatBlockedResponses, UpdateCustomItemData, UpdateCustomItemImageData, UpdateCustomItemImageResponses, UpdateCustomItemIndexesData, UpdateCustomItemIndexesResponses, UpdateCustomItemResponses, UpdateEventData, UpdateEventResponses, UpdateEventsData, UpdateEventsResponses, UpdateFolderData, UpdateFolderResponses, UpdateFolderSharedWithData, UpdateFolderSharedWithResponses, UpdateGearData, UpdateGearResponses, UpdateIntervalData, UpdateIntervalResponses, UpdateIntervalsData, UpdateIntervalsResponses, UpdateLastSeenMessageIdData, UpdateLastSeenMessageIdResponses, UpdateMessageData, UpdateMessageResponses, UpdatePlanWorkoutsData, UpdatePlanWorkoutsResponses, UpdateReminderData, UpdateReminderResponses, UpdateSportSettingsData, UpdateSportSettingsMultiData, UpdateSportSettingsMultiResponses, UpdateSportSettingsResponses, UpdateWeatherConfigData, UpdateWeatherConfigResponses, UpdateWellnessBulkData, UpdateWellnessBulkResponses, UpdateWellnessData, UpdateWellnessRecordData, UpdateWellnessRecordResponses, UpdateWellnessResponses, UpdateWorkoutData, UpdateWorkoutResponses, UploadActivityData, UploadActivityResponses, UploadActivityStreamsCsvData, UploadActivityStreamsCsvResponses, UploadWellnessData, UploadWellnessResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -280,6 +280,12 @@ export const updateGear = <ThrowOnError extends boolean = false>(options: Option
         'Content-Type': 'application/json',
         ...options.headers
     }
+});
+
+export const listFolderWorkouts = <ThrowOnError extends boolean = false>(options: Options<ListFolderWorkoutsData, ThrowOnError>): RequestResult<ListFolderWorkoutsResponses, unknown, ThrowOnError> => (options.client ?? client).get<ListFolderWorkoutsResponses, unknown, ThrowOnError>({
+    security: [{ scheme: 'basic', type: 'http' }, { scheme: 'bearer', type: 'http' }],
+    url: '/api/v1/athlete/{id}/folders/{folderId}/workouts',
+    ...options
 });
 
 /**
@@ -834,6 +840,12 @@ export const createGear = <ThrowOnError extends boolean = false>(options: Option
     }
 });
 
+export const shareFolderWithMe = <ThrowOnError extends boolean = false>(options: Options<ShareFolderWithMeData, ThrowOnError>): RequestResult<ShareFolderWithMeResponses, unknown, ThrowOnError> => (options.client ?? client).post<ShareFolderWithMeResponses, unknown, ThrowOnError>({
+    security: [{ scheme: 'basic', type: 'http' }, { scheme: 'bearer', type: 'http' }],
+    url: '/api/v1/athlete/{id}/folders/{folderId}/share-with-me',
+    ...options
+});
+
 /**
  * Create new workout from .zwo, .mrc, .erg or .fit file in a folder
  */
@@ -1070,6 +1082,31 @@ export const sendActivityMessage = <ThrowOnError extends boolean = false>(option
 });
 
 /**
+ * Download original activity file, Strava activities not supported
+ */
+export const downloadActivityFile = <ThrowOnError extends boolean = false>(options: Options<DownloadActivityFileData, ThrowOnError>): RequestResult<DownloadActivityFileResponses, unknown, ThrowOnError> => (options.client ?? client).get<DownloadActivityFileResponses, unknown, ThrowOnError>({
+    security: [{ scheme: 'basic', type: 'http' }, { scheme: 'bearer', type: 'http' }],
+    url: '/api/v1/activity/{id}/file',
+    ...options
+});
+
+/**
+ * Replace the original activity file and reprocess the activity
+ *
+ * Name, description, type, gear, tags, zones, RPE etc. are kept. If the file has not changed nothing is done and the response is still 200 but with activity null, so check for that. Supports .fit, .tcx and .gpx files, optionally gzipped (.gz), or a .zip containing exactly one of these. Strava activities not supported.
+ */
+export const replaceActivityFile = <ThrowOnError extends boolean = false>(options: Options<ReplaceActivityFileData, ThrowOnError>): RequestResult<ReplaceActivityFileResponses, unknown, ThrowOnError> => (options.client ?? client).post<ReplaceActivityFileResponses, unknown, ThrowOnError>({
+    ...formDataBodySerializer,
+    security: [{ scheme: 'basic', type: 'http' }, { scheme: 'bearer', type: 'http' }],
+    url: '/api/v1/activity/{id}/file',
+    ...options,
+    headers: {
+        'Content-Type': null,
+        ...options.headers
+    }
+});
+
+/**
  * Get a shared event (e.g. race)
  */
 export const getSharedEvent = <ThrowOnError extends boolean = false>(options: Options<GetSharedEventData, ThrowOnError>): RequestResult<GetSharedEventResponses, unknown, ThrowOnError> => (options.client ?? client).get<GetSharedEventResponses, unknown, ThrowOnError>({
@@ -1084,6 +1121,12 @@ export const getSharedEvent = <ThrowOnError extends boolean = false>(options: Op
 export const listPaceDistances = <ThrowOnError extends boolean = false>(options?: Options<ListPaceDistancesData, ThrowOnError>): RequestResult<ListPaceDistancesResponses, unknown, ThrowOnError> => (options?.client ?? client).get<ListPaceDistancesResponses, unknown, ThrowOnError>({
     security: [{ scheme: 'basic', type: 'http' }, { scheme: 'bearer', type: 'http' }],
     url: '/api/v1/pace_distances',
+    ...options
+});
+
+export const searchForFolders = <ThrowOnError extends boolean = false>(options: Options<SearchForFoldersData, ThrowOnError>): RequestResult<SearchForFoldersResponses, unknown, ThrowOnError> => (options.client ?? client).get<SearchForFoldersResponses, unknown, ThrowOnError>({
+    security: [{ scheme: 'basic', type: 'http' }, { scheme: 'bearer', type: 'http' }],
+    url: '/api/v1/folder-search',
     ...options
 });
 
@@ -1451,6 +1494,17 @@ export const getTimeAtHr = <ThrowOnError extends boolean = false>(options: Optio
 });
 
 /**
+ * Analyze the activity's sub-maximal fatigue test
+ *
+ * Compares the test with the athlete's previous comparable tests and their wellness data and classifies it as GREEN, WITHIN_NOISE, AMBER, RED or INSUFFICIENT_DATA with the reasoning. Needs read access to the athlete's activities and wellness. The text is in the caller's language (the locale cookie), English if not set.
+ */
+export const getSftAnalysis = <ThrowOnError extends boolean = false>(options: Options<GetSftAnalysisData, ThrowOnError>): RequestResult<GetSftAnalysisResponses, unknown, ThrowOnError> => (options.client ?? client).get<GetSftAnalysisResponses, unknown, ThrowOnError>({
+    security: [{ scheme: 'basic', type: 'http' }, { scheme: 'bearer', type: 'http' }],
+    url: '/api/v1/activity/{id}/sft-analysis',
+    ...options
+});
+
+/**
  * Get activity segments
  */
 export const getActivitySegments = <ThrowOnError extends boolean = false>(options: Options<GetActivitySegmentsData, ThrowOnError>): RequestResult<GetActivitySegmentsResponses, unknown, ThrowOnError> => (options.client ?? client).get<GetActivitySegmentsResponses, unknown, ThrowOnError>({
@@ -1595,15 +1649,6 @@ export const getGapHistogram = <ThrowOnError extends boolean = false>(options: O
 export const downloadActivityFitFile = <ThrowOnError extends boolean = false>(options: Options<DownloadActivityFitFileData, ThrowOnError>): RequestResult<DownloadActivityFitFileResponses, unknown, ThrowOnError> => (options.client ?? client).get<DownloadActivityFitFileResponses, unknown, ThrowOnError>({
     security: [{ scheme: 'basic', type: 'http' }, { scheme: 'bearer', type: 'http' }],
     url: '/api/v1/activity/{id}/fit-file',
-    ...options
-});
-
-/**
- * Download original activity file, Strava activities not supported
- */
-export const downloadActivityFile = <ThrowOnError extends boolean = false>(options: Options<DownloadActivityFileData, ThrowOnError>): RequestResult<DownloadActivityFileResponses, unknown, ThrowOnError> => (options.client ?? client).get<DownloadActivityFileResponses, unknown, ThrowOnError>({
-    security: [{ scheme: 'basic', type: 'http' }, { scheme: 'bearer', type: 'http' }],
-    url: '/api/v1/activity/{id}/file',
     ...options
 });
 

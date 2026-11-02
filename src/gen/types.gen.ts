@@ -594,10 +594,10 @@ export type GearReminder = {
     starting_activities?: number;
     snoozed_until?: string;
     percent_used?: number;
-    distance_used?: number;
     time_used?: number;
     activities_used?: number;
     days_used?: number;
+    distance_used?: number;
 };
 
 export type ActivityFilter = {
@@ -1276,6 +1276,7 @@ export type SportSettings = {
     sft_target_percent?: number;
     sft_tolerance_percent?: number;
     sft_max_cv_percent?: number;
+    cho_used_calc?: 'NONE' | 'ROTHSCHILD_2024';
     load_order?: 'POWER_HR_PACE' | 'POWER_PACE_HR' | 'HR_POWER_PACE' | 'HR_PACE_POWER' | 'PACE_POWER_HR' | 'PACE_HR_POWER';
     tiz_order?: 'POWER_HR_PACE' | 'POWER_PACE_HR' | 'HR_POWER_PACE' | 'HR_PACE_POWER' | 'PACE_POWER_HR' | 'PACE_HR_POWER';
     workout_order?: 'POWER_HR_PACE' | 'POWER_PACE_HR' | 'HR_POWER_PACE' | 'HR_PACE_POWER' | 'PACE_POWER_HR' | 'PACE_HR_POWER';
@@ -1466,6 +1467,9 @@ export type SubmaxFatigueTest = {
     target?: number;
     max_cv_percent?: number;
     tolerance_percent?: number;
+    hr_rise?: number;
+    hr_response_secs?: number;
+    status?: 'GREEN' | 'WITHIN_NOISE' | 'AMBER' | 'RED' | 'INSUFFICIENT_DATA';
     rpe?: number;
     tte_mins?: number;
     ignore?: boolean;
@@ -1610,6 +1614,10 @@ export type NewActivityMsg = {
 export type NewMsg = {
     id?: number;
     new_chat?: Chat;
+};
+
+export type ReplaceFileResponse = {
+    activity?: Activity;
 };
 
 export type ActivityWeather = {
@@ -2321,6 +2329,108 @@ export type Plot = {
     min_bpm?: number;
     secs?: Array<number>;
     cumulative_secs?: Array<number>;
+};
+
+export type Change = {
+    name?: string;
+    units?: string;
+    today?: number;
+    mean?: number;
+    te?: number;
+    z?: number;
+    tests?: number;
+    possible?: boolean;
+    clear?: boolean;
+};
+
+export type Hrv = {
+    mornings?: Array<Morning>;
+    baselineStart?: string;
+    baselineEnd?: string;
+    baselineMornings?: number;
+    baselineMean?: number;
+    baselineSd?: number;
+    swc?: number;
+    threshold?: number;
+    recentMornings?: number;
+    recentMean?: number;
+    baselineRmssd?: number;
+    recentRmssd?: number;
+    thresholdRmssd?: number;
+    flagged?: boolean;
+};
+
+export type Morning = {
+    date?: string;
+    rmssd?: number;
+    ln?: number;
+    recent?: boolean;
+};
+
+export type Night = {
+    date?: string;
+    hours?: number;
+    recent?: boolean;
+};
+
+export type Reason = {
+    indicator?: 'GOOD' | 'NEUTRAL' | 'BAD';
+    flag?: 'RPE_UP' | 'HR_RESPONSE_SLOW' | 'HRR_CHANGED' | 'WELLNESS_WORSE' | 'RESTING_HR_UP' | 'HRV_LOW';
+    flagged?: boolean;
+    text?: string;
+};
+
+export type RestingHr = {
+    mornings?: Array<Morning>;
+    baselineStart?: string;
+    baselineEnd?: string;
+    baselineMean?: number;
+    baselineSd?: number;
+    baselineMin?: number;
+    baselineMax?: number;
+    threshold?: number;
+    recentMornings?: number;
+    highMornings?: number;
+    flagged?: boolean;
+};
+
+export type SftAnalysis = {
+    status?: 'GREEN' | 'WITHIN_NOISE' | 'AMBER' | 'RED' | 'INSUFFICIENT_DATA';
+    meaning?: string;
+    action?: string;
+    reasons?: Array<Reason>;
+    flags?: Array<'RPE_UP' | 'HR_RESPONSE_SLOW' | 'HRR_CHANGED' | 'WELLNESS_WORSE' | 'RESTING_HR_UP' | 'HRV_LOW'>;
+    baselineTests?: number;
+    tests?: Array<Test>;
+    efficiency?: Change;
+    hrResponse?: Change;
+    hrRise?: Change;
+    hrRecovery?: Change;
+    rpeChange?: number;
+    restingHR?: RestingHr;
+    hrv?: Hrv;
+    sleep?: Sleep;
+};
+
+export type Sleep = {
+    nights?: Array<Night>;
+    usualStart?: string;
+    usualEnd?: string;
+    usualNights?: number;
+    usualMean?: number;
+    usualSd?: number;
+    usualMin?: number;
+    usualMax?: number;
+    recentNights?: number;
+    recentMean?: number;
+    points?: number;
+};
+
+export type Test = {
+    activity_id?: string;
+    start_date_local?: string;
+    test?: SubmaxFatigueTest;
+    current?: boolean;
 };
 
 export type IcuSegment = {
@@ -3157,6 +3267,25 @@ export type UpdateGearResponses = {
 };
 
 export type UpdateGearResponse = UpdateGearResponses[keyof UpdateGearResponses];
+
+export type ListFolderWorkoutsData = {
+    body?: never;
+    path: {
+        id: string;
+        folderId: number;
+    };
+    query?: never;
+    url: '/api/v1/athlete/{id}/folders/{folderId}/workouts';
+};
+
+export type ListFolderWorkoutsResponses = {
+    /**
+     * OK
+     */
+    200: Array<Workout>;
+};
+
+export type ListFolderWorkoutsResponse = ListFolderWorkoutsResponses[keyof ListFolderWorkoutsResponses];
 
 export type UpdatePlanWorkoutsData = {
     body: Workout;
@@ -4143,6 +4272,25 @@ export type CreateGearResponses = {
 
 export type CreateGearResponse = CreateGearResponses[keyof CreateGearResponses];
 
+export type ShareFolderWithMeData = {
+    body?: never;
+    path: {
+        id: string;
+        folderId: number;
+    };
+    query?: never;
+    url: '/api/v1/athlete/{id}/folders/{folderId}/share-with-me';
+};
+
+export type ShareFolderWithMeResponses = {
+    /**
+     * OK
+     */
+    200: Array<Folder>;
+};
+
+export type ShareFolderWithMeResponse = ShareFolderWithMeResponses[keyof ShareFolderWithMeResponses];
+
 export type ImportWorkoutFileData = {
     body?: {
         file: Blob | File;
@@ -4570,6 +4718,54 @@ export type SendActivityMessageResponses = {
 
 export type SendActivityMessageResponse = SendActivityMessageResponses[keyof SendActivityMessageResponses];
 
+export type DownloadActivityFileData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/api/v1/activity/{id}/file';
+};
+
+export type DownloadActivityFileResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
+
+export type ReplaceActivityFileData = {
+    body?: {
+        /**
+         * Activity file
+         */
+        file: Blob | File;
+    };
+    path: {
+        id: string;
+    };
+    query?: {
+        /**
+         * Keep the current intervals
+         */
+        keep_intervals?: boolean;
+        /**
+         * Keep current custom activity field values
+         */
+        keep_custom_fields?: boolean;
+    };
+    url: '/api/v1/activity/{id}/file';
+};
+
+export type ReplaceActivityFileResponses = {
+    /**
+     * OK
+     */
+    200: ReplaceFileResponse;
+};
+
+export type ReplaceActivityFileResponse = ReplaceActivityFileResponses[keyof ReplaceActivityFileResponses];
+
 export type GetSharedEventData = {
     body?: never;
     path: {
@@ -4608,6 +4804,32 @@ export type ListPaceDistancesResponses = {
 };
 
 export type ListPaceDistancesResponse = ListPaceDistancesResponses[keyof ListPaceDistancesResponses];
+
+export type SearchForFoldersData = {
+    body?: never;
+    path?: never;
+    query: {
+        q: string;
+        type?: 'FOLDER' | 'PLAN';
+        activity_types?: Array<'Ride' | 'Run' | 'Swim' | 'WeightTraining' | 'Hike' | 'Walk' | 'AlpineSki' | 'BackcountrySki' | 'Badminton' | 'Canoeing' | 'Crossfit' | 'EBikeRide' | 'EMountainBikeRide' | 'Elliptical' | 'Golf' | 'GravelRide' | 'TrackRide' | 'Handcycle' | 'HighIntensityIntervalTraining' | 'Hockey' | 'IceSkate' | 'InlineSkate' | 'Kayaking' | 'Kitesurf' | 'MountainBikeRide' | 'Cyclocross' | 'NordicSki' | 'OpenWaterSwim' | 'Padel' | 'Pilates' | 'Pickleball' | 'Racquetball' | 'Rugby' | 'RockClimbing' | 'RollerSki' | 'Rowing' | 'Sail' | 'Skateboard' | 'Snowboard' | 'Snowshoe' | 'Soccer' | 'Squash' | 'StairStepper' | 'StandUpPaddling' | 'Surfing' | 'TableTennis' | 'Tennis' | 'TrailRun' | 'Transition' | 'Velomobile' | 'VirtualRide' | 'VirtualRow' | 'VirtualRun' | 'VirtualSki' | 'WaterSport' | 'Wheelchair' | 'Windsurf' | 'Workout' | 'Yoga' | 'Other'>;
+        weeks_min: number;
+        weeks_max: number;
+        hours_per_week_min: number;
+        hours_per_week_max: number;
+        workout_targets?: Array<'AUTO' | 'POWER' | 'HR' | 'PACE'>;
+        limit?: number;
+    };
+    url: '/api/v1/folder-search';
+};
+
+export type SearchForFoldersResponses = {
+    /**
+     * OK
+     */
+    200: Array<Folder>;
+};
+
+export type SearchForFoldersResponse = SearchForFoldersResponses[keyof SearchForFoldersResponses];
 
 export type ListMessagesData = {
     body?: never;
@@ -5595,6 +5817,24 @@ export type GetTimeAtHrResponses = {
 
 export type GetTimeAtHrResponse = GetTimeAtHrResponses[keyof GetTimeAtHrResponses];
 
+export type GetSftAnalysisData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/api/v1/activity/{id}/sft-analysis';
+};
+
+export type GetSftAnalysisResponses = {
+    /**
+     * OK
+     */
+    200: SftAnalysis;
+};
+
+export type GetSftAnalysisResponse = GetSftAnalysisResponses[keyof GetSftAnalysisResponses];
+
 export type GetActivitySegmentsData = {
     body?: never;
     path: {
@@ -5933,22 +6173,6 @@ export type DownloadActivityFitFileData = {
 };
 
 export type DownloadActivityFitFileResponses = {
-    /**
-     * OK
-     */
-    200: unknown;
-};
-
-export type DownloadActivityFileData = {
-    body?: never;
-    path: {
-        id: string;
-    };
-    query?: never;
-    url: '/api/v1/activity/{id}/file';
-};
-
-export type DownloadActivityFileResponses = {
     /**
      * OK
      */
